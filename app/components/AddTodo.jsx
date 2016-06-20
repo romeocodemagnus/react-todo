@@ -3,7 +3,7 @@ var React = require('react');
 
 var AddTodo = React.createClass({
 	handleSubmit: function(e){
-		//e.preventDefault();
+		e.preventDefault();
 		var todoText = this.todoTextInput.value;
 
 		if (todoText.length > 0){
