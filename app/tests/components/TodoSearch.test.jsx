@@ -14,7 +14,6 @@ describe('TodoSearch', () => {
 		var searchText = 'Dog';
 		var spy = expect.createSpy();
 		var todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy} />);
-		var $el = $(ReactDOM.findDOMNode(todoSearch));
 
 		todoSearch.searchTextInput.value = searchText;
 		TestUtils.Simulate.change(todoSearch.searchTextInput);
@@ -25,8 +24,6 @@ describe('TodoSearch', () => {
 		var searchText = '';
 		var spy = expect.createSpy();
 		var todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy} />);
-		var showCompleted = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy} />);
-		var $el = $(ReactDOM.findDOMNode(todoSearch));
 
 		todoSearch.searchTextInput.value = searchText;
 		todoSearch.showCompleted.checked = true;

@@ -1,3 +1,5 @@
+'use strict';
+
 var webpack = require('webpack');
 var path = require('path');
 
@@ -24,7 +26,9 @@ module.exports = {
     root: __dirname,
     modulesDirectories: [
       'node_modules',
-      './app/components'
+      './app/components',
+      './app/api',
+      './app/tests/api'
     ],
     alias: {
       applicationStyles: 'app/styles/app.scss'
