@@ -1,36 +1,30 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
-var TestUtils = require('react-addons-test-utils');
-var expect = require('expect'); 
-var $ = require('jquery');
+var {connect} = require('react-redux');
+var actions = require('actions');
 
-var AddTodo = require('AddTodo');
+export var AddTodo = React.createClass({
+  handleSubmit: function (e) {
+    e.preventDefault();
+    var {dispatch} = this.props;
+    var todoText = this.refs.todoText.value;
 
-describe('AddTodo', () => {
-	it('should exist', () => {
-		expect(AddTodo).toExist();
-	});
-
-	it('should call onAddTodo prop with valid data', () => {
-		var todoText = 'Check mail';
-		var spy = expect.createSpy();
-		var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy} />);
-		var $el = $(ReactDOM.findDOMNode(addTodo));
-
-		addTodo.todoTextInput.value = todoText;
-		TestUtils.Simulate.submit($el.find('form')[0]);
-
-		expect(spy).toHaveBeenCalledWith(todoText);
-	});
-	it('should not call onAddTodo prop when invalid input', () => {
-	    var todoText = '';
-	    var spy = expect.createSpy();
-	    var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy}/>);
-	    var $el = $(ReactDOM.findDOMNode(addTodo));
-
-	    addTodo.todoTextInput.value = todoText;
-	    TestUtils.Simulate.submit($el.find('form')[0]);
-
-	    expect(spy).toNotHaveBeenCalled();
-  	});
+    if (todoText.length > 0) {
+      this.refs.todoText.value = '';
+      dispatch(actions.addTodo(todoText));
+    } else {
+      this.refs.todoText.focus();
+    }
+  },
+  render: function () {
+    return (
+      <div className="container__footer">
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" ref="todoText" placeholder="What do you need to do?"/>
+          <button className="button expanded">Add Todo</button>
+        </form>
+      </div>
+    );
+  }
 });
+
+export default connect()(AddTodo);
