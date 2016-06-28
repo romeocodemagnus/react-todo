@@ -5,6 +5,13 @@ export var setSearchText = (searchText) => {
   };
 };
 
+export var addTodos = (todos) => {
+  return {
+    type: 'ADD_TODOS',
+    todos
+  };
+}
+
 export var toggleShowCompleted = () => {
   return {
     type: 'TOGGLE_SHOW_COMPLETED'
